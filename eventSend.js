@@ -102,13 +102,12 @@ var eventHubClient = client.connect(uri)
     ]);
   });
   
-var sendFunction = function(){
+var sendFunction = function(message){
 eventHubClient.spread(function(sender, unused) {
     sender.on('errorReceived', function (tx_err) { console.warn('===> TX ERROR: ', tx_err); });
     var x;
     for(var i=0;i<2;++i){ 
-    // {'x-opt-partition-key': 'pk' + msgVal}
-    var message = { "Test":i, DataValue: msgVal };
+  
     var options = { annotations: { 'x-opt-partition-key': 'pk' + msgVal } };
     x = sender.send(message, options).then(function (state) {
       // this can be used to optionally track the disposition of the sent message
@@ -121,9 +120,11 @@ eventHubClient.spread(function(sender, unused) {
     console.warn('connection error: ', e);
   });
 }
+var droneMoveType = process.argv[3];
+ var message = { "type":droneMoveType, DataValue: msgVal };
+console.log(droneMoveType);
+sendFunction(message);
+//eventEmitter.on("sendData",sendFunction.bind(message));
 
-eventEmitter.on("sendData",sendFunction);
-
-eventEmitter.emit("sendData");
-eventEmitter.emit("sendData");
+//eventEmitter.emit("sendData");
 
