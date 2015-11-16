@@ -17,6 +17,7 @@ var Promise = require('bluebird'),
     AMQPClient  = require('amqp10').Client,
     Policy = require('amqp10').Policy,
     translator = require('amqp10').translator;
+var droneClient = require('./Drone');
 
 // Set the offset for the EventHub - this is where it should start receiving from, and is typically different for each partition
 // Here, I'm setting a global offset, just to show you how it's done. See node-sbus-amqp10 for a wrapper library that will
@@ -71,14 +72,15 @@ var client = new AMQPClient(Policy.EventHub);
 var errorHandler = function(myIdx, rx_err) { console.warn('==> RX ERROR: ', rx_err); };
 var messageHandler = function (myIdx, msg) {
   console.log('received(' + myIdx + '): ', msg.body);
-  if (msg.annotations) console.log('annotations: ', msg.annotations);
-  if (msg.body.DataValue === msgVal) {
-    console.log("msg.body");
-   // client.disconnect().then(function () {
-     // console.log('disconnected, when we saw the value we inserted.');
-      //process.exit(0);
-    //});
-  }
+    if(msg.body.type=="takeoff"){
+	droneClient.takeoff();
+    }
+    else if(msg.body.type=="land"){
+	droneClient.land();
+    }
+    else if(msg.body.type=="move"){
+	//droneClient.move(msg.body.move);
+    }
 };
 
 function range(begin, end) {
