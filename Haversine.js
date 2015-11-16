@@ -1,18 +1,4 @@
-// var haversine = require('haversine');
-// 
-// start = {
-//   latitude: 30.849635,
-//   longitude: -83.24559
-// };
-// end = {
-//   latitude: 27.950575,
-//   longitude: -82.457178
-// };
-// 
-// console.log(haversine(start, end));
-// console.log(haversine(start, end, { unit: 'km' }))
-// console.log(haversine(start, end, { threshold: 1 }))
-// console.log(haversine(start, end, { threshold: 1, unit: 'km' }))
+
 Number.prototype.toRadians = function() {
    return this * Math.PI / 180;
 }
@@ -33,6 +19,9 @@ function HaversineDistance(start, end)
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));  
   return R * c;
 };
+module.exports.HaversineDistance = HaversineDistance;
+
+
 
 function InitBearing(start, end)
 {
@@ -41,11 +30,17 @@ function InitBearing(start, end)
   
   return Math.atan2(y,x).toDegrees();
 }
+module.exports.InitBearing = InitBearing;
+
+
 
 function FinalBearing(start, end)
 {
   return (InitBearing(end, start) + 180) %360;
 }
+
+module.exports.FinalBearing = FinalBearing;
+
 
 function IntermediatePoint(start, end, fraction)
 {
@@ -60,6 +55,10 @@ function IntermediatePoint(start, end, fraction)
   var coordinates = {latitude: lat.toDegrees(), longitude: long.toDegrees()}
   return coordinates
 }
+
+module.exports.IntermediatePoint = IntermediatePoint;
+
+
 
 function DeviationFromNorth(x,y,z, currentDeclination)
 {
@@ -84,16 +83,8 @@ function DeviationFromNorth(x,y,z, currentDeclination)
     }
   }
 }
+module.exports.DeviationFromNorth = DeviationFromNorth;
 
-var a = {latitude:30.849635, longitude: -83.24559 };
-var b = {latitude: 27.950575,longitude: -82.457178 };
-var x = 16;
-var y = -84;
-var z = -84;
-var decline = -0.718
 
-console.log("distance = " + HaversineDistance(a, b));
-console.log("Bearing = " + (InitBearing(a,b) + 360) % 360);
-console.log(DeviationFromNorth(x,y,z,decline));
-//console.log("turn angle = " + (InitBearing(a,b) - DeviationFromNorth(x,y,z,decline)));
-//console.log(IntermediatePoint(a,b,0));
+
+
