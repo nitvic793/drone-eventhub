@@ -1,0 +1,24 @@
+{
+  "name": "drone-event-hub",
+  "version": "0.0.1",
+  "description": "Drone control via Azure Event Hub",
+  "main": "droneControl.js",
+  "dependencies": {
+    "amqp10": "^2.1.1",
+    "ar-drone": "^0.3.3",
+    "bluebird": "^3.0.5",
+    "events": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node droneControl.js settings.json"
+  },
+  "keywords": [
+    "drone",
+    "event",
+    "hub",
+    "iot"
+  ],
+  "author": "Nitish Victor",
+  "license": "ISC"
+}

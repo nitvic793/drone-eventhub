@@ -1,0 +1,7 @@
+{
+	"SASKeyName":"RecieveRule",
+	"SASKey":"+tzONVsUOU/nGDFKrzkF7Ng6t+lUgVbmlCXNxhXbYnk=",
+	"serviceBusHost":"dronehub-ns",
+	"eventHubName":"dronehub",
+	"partitions":"4"	
+}
