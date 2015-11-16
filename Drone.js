@@ -9,7 +9,10 @@ client.on('navdata',function(data){
 });
 
 module.exports.takeoff = function(){
-    client.takeoff();
+    client.takeoff()
+    .after(2000,function(){
+        client.ftrim();
+    });
 }
 
 module.exports.land = function(){

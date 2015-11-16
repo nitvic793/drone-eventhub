@@ -88,3 +88,18 @@ module.exports.DeviationFromNorth = DeviationFromNorth;
 
 
 
+<<<<<<< HEAD:Haversine.js
+=======
+var a = {latitude:30.849635, longitude: -83.24559 };
+var b = {latitude: 27.950575,longitude: -82.457178 };
+var x = 16;
+var y = -84;
+var z = -84;
+var decline = -0.718
+
+console.log("distance = " + HaversineDistance(a, b));
+console.log("Bearing = " + (InitBearing(a,b) + 360) % 360);
+console.log(DeviationFromNorth(x,y,z,decline));
+//console.log("turn angle = " + (InitBearing(a,b) - DeviationFromNorth(x,y,z,decline)));
+//console.log(IntermediatePoint(a,b,0));
+>>>>>>> 410eefb5d504a2f2d9674d2e3b6e22229d7580ba:Haversine.js
